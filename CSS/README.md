@@ -1,10 +1,12 @@
 # CSS
+
 Cascading Style Sheet 层叠样式表
 
 ### [CSS选择器](./CSS选择器.md)
 
 
 ### 盒模型
+
 盒模型有两种， IE 怪异盒子模型、W3C标准盒子模型；
 
 盒模型是由： 内容(content)、内边距(padding)、边框(border)、外边距(margin) 组成的。
@@ -21,24 +23,30 @@ IE盒模型的宽高是指的content+padding+border的宽高。
 ### CSS如何设置这两种盒模型？
 
 标准盒模型：
+
 ``` 
 box-sizing: content-box;
 ```
+
 怪异盒模型：
+
 ```
 box-sizing: border-box;
 ```
 
 
 ### BFC
+
 [什么是BFC](https://www.cnblogs.com/libin-1/p/7098468.html)
 
 W3C对BFC定义：
+
 > 浮动元素和绝对定位元素，非块级盒子的块级容器（例如 inline-blocks, table-cells, 和 table-captions），以及overflow值不为“visiable”的块级盒子，都会为他们的内容创建新的BFC（块级格式上下文）。
 
 BFC(Block formatting context)直译为"块级格式化上下文"。它是一个独立的渲染区域，只有Block-level box参与， 它规定了内部的Block-level Box如何布局，并且与这个区域外部毫不相干。
 
 BFC作用：
+
 1. 利用BFC避免外边距折叠
 2. 清除内部浮动 （撑开高度）
    1. 原理: 触发父div的BFC属性，使下面的子div都处在父div的同一个BFC区域之内
@@ -47,13 +55,15 @@ BFC作用：
 5. 多列布局中使用BFC
 
 如何生成BFC：（脱离文档流，满足下列的任意一个或多个条件即可）
+
 1. 根元素，即HTML元素（最大的一个BFC）
 2. float的值不为none
 3. position的值为absolute或fixed
 4. overflow的值不为visible（默认值。内容不会被修剪，会呈现在元素框之外）
-5. display的值为inline-block、table-cell、table-caption
+5. display的值为inline-block、table、table-row、 table-row-group、table-header-group、table-footer-group、table-cell、 table-caption、 flow-root、flex` 或 `inline-flex、grid` 或 `inline-grid
 
 BFC布局规则：
+
 1. 内部的Box会在垂直方向，一个接一个地放置。
 2. 属于同一个BFC的两个相邻的Box的margin会发生重叠
 3. BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此, 文字环绕效果，设置float
@@ -62,6 +72,7 @@ BFC布局规则：
 
 
 ### BFC、IFC、GFC 和 FFC
+
  - BFC（Block formatting contexts）：块级格式上下文
 
  - IFC（Inline formatting contexts）：内联格式上下文
@@ -73,6 +84,7 @@ BFC布局规则：
 
 
 ### 非布局样式
+
  - 字体、字重、颜色、大小、行高
  - 背景、边框
  - 滚动、换行
@@ -81,13 +93,15 @@ BFC布局规则：
 
 
 ### 行高的构成
+
  - 行高是由 line-box 组成的
  - line-box 是由一行里的 inline-box 组成的
- - inline-box中最高的那个，或字体最大的拿个决定行高
+ - inline-box中最高的那个，或字体最大的那个决定行高
 
 
 
 ### float
+
  - 元素"浮动"
  - 脱离文档流
  - 不脱离文本流
@@ -95,23 +109,27 @@ BFC布局规则：
 
 
 对自己的影响
+
  - 形成"块"(BFC)
  - 这个块会负责自己的布局，宽高由自己决定
 
 比如 span 中用 float 这个span就形成了一个BFC，就可以设置宽高了
 
 对兄弟元素的影响
+
  - 上面一般贴非float元素
  - 靠边贴float元素或边
  - 不影响其他块级元素位置
  - 影响其他块级元素文本
 
 对父级元素的影响
+
  - 从布局上"消失"
  - 高度塌陷
 
 
-### 清楚浮动
+### 清除浮动
+
 浮动的元素布局时不会占据父元素的布局空间，即父元素布局时不会管浮动元素，浮动元素有可能超出父元素，从而对其他元素造成影响。
 
 方法一：让父元素变为一个BFC。
@@ -120,6 +138,7 @@ BFC布局规则：
 
 
 方法二： 使用伪元素清楚浮动
+
 ```css
 .container::after {
   content: " ";
@@ -132,9 +151,11 @@ BFC布局规则：
 
 
 ### inline-block的间隙
+
 两个并列的inline-block中间会有一条裂缝，这个的原因是两个标签之间有空格，浏览器把这些空格当成文字中空格，所以这两个块中间多少有间隙。
 
 解决办法：
+
 1. 删除两个标签间的空格，但是这样html排版不好
 2. 容器元素font-size: 0 然后再在里面再重新设置字体大小
 
@@ -159,6 +180,7 @@ BFC布局规则：
 
 
 ### 图片下面有一个缝隙是因为什么
+
 ![fenxi](../img/imgbottom.png)
 
 因为 img 也相当于一个 inline 的元素， inline 就要遵守行高的构成，它会按照base基线对齐，基线对齐的话那么它就会和底线间有一个缝隙。
@@ -168,6 +190,7 @@ BFC布局规则：
 
 
 ### 边框
+
  - 边框的属性： 线型、大小、颜色
  - 边框背景图
  - 边框衔接
@@ -175,14 +198,16 @@ BFC布局规则：
 
 
 ### 滚动
- - visible 滚动条隐藏, 文字超出显示
- - hidden  滚动条隐藏, 文字超出不显示
- - scroll  滚动条一直显示，无论文字是否够多
- - auto    滚动条自动隐藏
+
+ - overflow: visible 滚动条隐藏, 文字超出显示
+ - overflow: hidden  滚动条隐藏, 文字超出不显示
+ - overflow: scroll  滚动条一直显示，无论文字是否够多
+ - overflow: auto    滚动条自动隐藏
 
 
 
 ### 文字折行
+
  - overflow-wrap(word-wrap)通用换行控制
    - 是否保留单词
  - word-break 针对多字节文本文字
@@ -192,6 +217,7 @@ BFC布局规则：
 
 
 ### 装饰属性及其他
+
  - 字重（粗体） font-weight
  - 斜体  font-style: itatic
  - 下划线   text-decoration
@@ -200,19 +226,23 @@ BFC布局规则：
 
 
 ### CSS Hack
+
 在一部分不合法，但是在某些浏览器上生效的写法就叫CSS Hack，一般用来兼容老的浏览器， 缺点是难理解、难维护、易失效
 
 替代方案： 
+
  - 特征检测
  - 针对性的加class
    - 比如第一步检测是IE6，那么只需要添加一个专门的 class 名来兼容IE6就好
 
 写Hack时需要注意
+
  - 标准属性写在前面， hack代码写在后面
 
 
 
 ### 单行文本溢出显示省略号
+
 ```css
 overflow: hidden;
 text-overflow: ellipsis;
@@ -222,6 +252,7 @@ white-space: no-wrap;
 
 
 ### 多行文本溢出显示省略号
+
 ```css
 overflow: hidden;
 text-overflow: ellipsis;
@@ -233,7 +264,9 @@ display: -webkit-box;
 
 
 ### display: none; 与 visibility: hidden; 的区别
+
 结构：
+
  - display:none
    - 会让元素完全从渲染树中消失，渲染的时候不占据任何空间, 不能点击，
  - visibility: hidden
@@ -242,12 +275,14 @@ display: -webkit-box;
    - 不会让元素从渲染树消失，渲染元素继续占据空间，只是内容不可见，可以点击
 
 继承
+
  - display: none和opacity: 0
    - 非继承属性，子孙节点消失由于元素从渲染树消失造成，通过修改子孙节点属性无法显示。
  - visibility: hidden
    - 继承属性，子孙节点消失由于继承了hidden，通过设置visibility: visible;可以让子孙节点显式。
 
 性能
+
    - display:none
      - 修改元素会造成文档回流。读屏器不会读取display: none元素内容，性能消耗较大
    - visibility:hidden
@@ -275,6 +310,7 @@ display: -webkit-box;
 
 
 ### CSS单位
+
 1. px  绝对单位。传统上一个像素对应于计算机屏幕上的一个点，而对于高清屏则对应更多。
 
 2. %   父元素**宽度**的比例。
@@ -296,6 +332,7 @@ display: -webkit-box;
 
 
 ### [transform变形](https://developer.mozilla.org/en-US/docs/Web/CSS/transform)
+
 与transition、translate名字有点像，transition是做过渡动画的，而translate是用来做平移的。
 
  - none	
@@ -329,9 +366,10 @@ display: -webkit-box;
  - skewY(angle)
  - perspective(n)	
    - 为 3D 转换元素定义透视视图。
- 
+
 
 ### CSS预处理器
+
  - 嵌套           
    - 反映层级和约束
  - 变量和计算      
@@ -348,6 +386,7 @@ display: -webkit-box;
 
 
 ### CSS 优化、提高性能的方法有哪些？
+
 - 多个 css 合并，尽量减少 HTTP 请求
 - css 雪碧图
 - 抽象提取公共样式，减少代码量
@@ -453,6 +492,7 @@ display: -webkit-box;
 
 把border的其他三条边设为透明
 注意，这里要把 `border-width` 、`border-style`、 `border-color` 分开写。
+
 ```css
 .tri {
   width: 0px;
@@ -490,9 +530,11 @@ display: -webkit-box;
 
 
 ### 谈谈浮动和清除浮动
+
 浮动的框可以向左或向右移动，**直到他的外边缘碰到包含框或另一个浮动框的边框为止**。 **浮动框脱离文档流**，所以文档的普通流的块框表现得就像浮动框不存在一样。浮动的块框会漂浮在文档普通流的块框上。
 
 清除方法：
+
 1. 父级 div 定义伪类：after 和 zoom (推荐使用，建议定义公共类，以减少 CSS 代码)
 
 ```css
@@ -507,6 +549,7 @@ display: -webkit-box;
 ```
 
 2. 在结尾处添加空 div 标签 clear:both
+
 ```html
 <div class="parent">
     <div class="left">Left</div>
@@ -519,6 +562,7 @@ display: -webkit-box;
     .clearfloat{clear:both}
 </style>
 ```
+
 父级 div 定义 overflow:auto。 同时需要父级指定宽度
 
 参考链接[几种常用的清除浮动方法](https://www.cnblogs.com/nxl0908/p/7245460.html)
@@ -621,6 +665,7 @@ p:first-child {color: red}
 
 
 ### base64的使用
+
  - 写入CSS， 减少HTTP请求
  - 适用于小图片
  - base64的体积约为原图4/3
@@ -628,18 +673,19 @@ p:first-child {color: red}
 
 
 ### margin叠加几种情况
+
 margin叠加的意思是：当两个或者更多的垂直外边距 相遇时，它们将形成一个外边距，这个外边距的高度等于两个发生叠加的外边距中高度较大者。
 
 1. 当一个元素出现在另一个元素上面时，第一个元素的底边外边距与第二个元素的顶边外边距发生叠加。如图：
-![叠加](../img/marginSuperposition1.png)
+   ![叠加](../img/marginSuperposition1.png)
 
 2. 当一个元素在另一个元素中时，它们的顶边距和低边距也会发生叠加
-![叠加2](../img/marginSuperposition2.png)
+   ![叠加2](../img/marginSuperposition2.png)
 
 3. 如果一个元素是空元素（即一个元素没有内容，内边距和边框），这种情况外边距的顶边距和低边距碰在一起也会发生叠加
-![叠加3](../img/marginSuperposition3.png)
+   ![叠加3](../img/marginSuperposition3.png)
 
 4. 在上面那种空元素的情况，如果该空元素与另一个元素的外边距碰在一起，也会发生叠加。
-![叠加4](../img/marginSuperposition4.png)
+   ![叠加4](../img/marginSuperposition4.png)
 
 以上4种外边距叠加情况**只会发生在普通文档流的垂直方向**。行内框、浮动框、绝对定位框之间的外边距不会发生叠加，同样水平方向也不会发生叠加。
