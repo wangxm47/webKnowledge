@@ -111,7 +111,7 @@ someDom.dispatchEvent(evt);
 
 ### IE 与火狐的事件机制有什么区别？ 如何阻止冒泡？
 
-IE 只事件冒泡，不支持事件捕获；火狐同时支持件冒泡和事件捕获。
+IE 只支持事件冒泡，不支持事件捕获；火狐同时支持件冒泡和事件捕获。
 
 阻止冒泡：
 
@@ -231,7 +231,7 @@ document
 
 1. mouseover/mouseout是标准事件，**所有浏览器都支持**；mouseenter/mouseleave是IE5.5引入的特有事件后来被DOM3标准采纳，现代标准浏览器也支持
 2. mouseover/mouseout是**冒泡**事件；mouseenter/mouseleave**不冒泡**。需要为**多个元素监听鼠标移入/出事件时，推荐mouseover/mouseout托管，提高性能**
-3. 标准事件模型中event.target表示发生移入/出的元素,**vent.relatedTarget**对应移出/如元素；在老IE中event.srcElement表示发生移入/出的元素，**event.toElement**表示移出的目标元素，**event.fromElement**表示移入时的来源元素
+3. 标准事件模型中event.target表示发生移入/出的元素,**event.relatedTarget**对应移出/入元素；在老IE中event.srcElement表示发生移入/出的元素，**event.toElement**表示移出的目标元素，**event.fromElement**表示移入时的来源元素
 
 
 
