@@ -17,14 +17,16 @@ HTML5不基于SGML，所以不用指定DTD
 
 [全局属性 | MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes)
 
-
 ### canvas和svg的区别
+
+* [canvas教程](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial)
+
 canvas是html5提供的新元素<canvas\>，而svg存在的历史要比canvas久远，已经有十几年了。svg并不是html5专有的标签，最初svg是用xml技术（超文本扩展语言，可以自定义标签或属性）描述二维图形的语言。在H5中看似canvas与svg很像，但是，他们有巨大的差别。
 
 首先，从它们的功能上来讲，canvas可以看做是一个画布。，其绘制出来的图形为**标量图**，因此，可以在canvas中引入jpg或png这类格式的图片，在实际开发中，大型的网络**游戏**都是用canvas画布做出来的，并且canvas的技术现在已经相当的成熟。另外，我们喜欢用canvas来做一些统计用的图表，如柱状图曲线图或饼状图等。
 而svg，所绘制的图形为**矢量图**，所以其用法上受到了限制。因为只能绘制矢量图，所以svg中不能引入普通的图片，因为矢量图的不会失真的效果，在项目中我们会用来**做小图标**。但是由于其本质为矢量图，可以被无限放大而不会失真，这很适合被用来做地图，而百度地图就是用svg技术做出来的。
 
-另外从技术发面来讲canvas里面绘制的图形不能被引擎抓取，如我们要让canvas里面的一个图片跟随鼠标事件: canvas.onmouseover=function(){}。
+另外从技术方面来讲canvas里面绘制的图形不能被引擎抓取，如我们要让canvas里面的一个图片跟随鼠标事件: canvas.onmouseover=function(){}。
 而svg里面的图形可以被引擎抓取，支持事件的绑定。另外canvas中我们绘制图形通常是通过javascript来实现，svg更多的是通过标签来来实现，如在svg中绘制正矩形形就要用<rect>，这里我们不能用属性style="width:XXX;height:XXX;"来定义。
 
 
@@ -32,6 +34,8 @@ canvas是html5提供的新元素<canvas\>，而svg存在的历史要比canvas久
 ### 行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？
 
 定义：CSS 规范规定，每个元素都有 display 属性，确定该元素的类型，每个元素都有默认的 display 值，如 div 的 display 默认值为“block”，则为“块级”元素；span 默认 display 属性值为“inline”，是“行内”元素。
+
+行内元素与块级元素属性的不同，主要是盒模型属性上：行内元素设置width无效，height无效(可以设置line-height)，margin上下无效，padding上下无效
 
 - 行内元素有：a b span img input select strong（强调的语气）
 - 块级元素有：div ul ol li dl dt dd h1 h2 h3 h4…p
