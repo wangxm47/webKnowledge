@@ -236,3 +236,20 @@ head子元素大概分为三类，分别是：
 
 #### 300毫秒点击延迟问题
 在移动端开发中，某些机型上使用click事件会延迟300ms才执行，这样影响了用户体验。 解决方法： 引入[fastclick.js](https://www.jianshu.com/p/05b142d84780)。
+
+### 让非表单元素获得焦点也是有办法的，先将tabIndex属性设置为-1，再调用focus()方法
+
+```HTML
+<div id="test" style="height:30px;width:100px;background:lightgreen">div</div>
+<button id="btn">div元素获得焦点</button>
+<script>
+btn.onclick = function(){
+    test.tabIndex = -1;
+    test.focus();    
+}
+test.onfocus = function(){
+    this.style.background = 'pink';
+}
+</script>
+```
+
