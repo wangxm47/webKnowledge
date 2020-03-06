@@ -3,7 +3,7 @@
 ## Flex布局
 [Flex - 阮一峰 （语法篇）](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
 [Flex - 阮一峰 （实战篇）](http://www.ruanyifeng.com/blog/2015/07/flex-examples.html)
- 
+
 
 
 ## grid网格布局
@@ -62,9 +62,12 @@ main部分首先要放在container的最前部分。然后是left,right
 
 
 ### 响应式设计和布局
+
+参考: https://juejin.im/post/5caaa230e51d452b672f9703
+
 在不同设备上正常使用，一般主要处理屏幕大小问题
  - 隐藏 + 折行 + 自适应空间
  - rem做单位
  - viewport
    - width=divice-width,
- - 媒体查询
+ - 媒体查询 参考: https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Media_queries
