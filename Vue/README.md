@@ -1,3 +1,17 @@
+### Vue核心思想：数据驱动、组件化
+
+#### 1.数据驱动
+
+DOM是数据的一种自然映射。
+
+传统的前端数据交互是用Ajax从服务端获取数据，然后操作DOM来改变视图；或者前端交互要改变数据时，又要再来一次上述步骤，而手动操作DOM是一个繁琐的过程且易出错。
+
+Vue.js 是一个提供了 MVVM 风格的双向数据绑定的 Javascript 库，专注于View 层。它让开发者省去了操作DOM的过程，只需要改变数据。Vue会通过Dircetives指令，对DOM做一层封装，当数据发生改变会通知指令去修改对应的DOM，数据驱动DOM变化，DOM是数据的一种自然映射。 Vue还会对操作进行监听，当视图发生改变时，vue监听到这些变化，从而改变数据，这样就形成了数据的双向绑定。
+
+#### 2.组件化
+
+扩展HTML元素，封装可重用的代码。每一个组件都对应一个`ViewModel`。页面上每个独立的可视/可交互区域都可以视为一个组件。每个组件对应一个工程目录，组件所需要的各种资源在这个目录下就进维护。页面是组件的容器，组件可以嵌套自由组合形成完整的页面。
+
 ### v-bind和v-model的区别
 
 1.v-bind用来绑定数据和属性以及表达式，缩写为`:`
@@ -177,8 +191,36 @@ import  home   from '../../common/home.vue'
 - 进行页面按需加载的引入方式：
 
 ```js
-const  home = r => require.ensure( [], () => r (require('../../common/home.vue')))
+//首先，可以将异步组件定义为返回一个 Promise 的工厂函数 (该函数返回的 Promise 应该 resolve 组件本身)：
+const Foo = () => Promise.resolve({ /* 组件定义对象 */ })
+
+//第二，在 Webpack 2 中，我们可以使用动态 import语法来定义代码分块点 (split point)：
+import('./Foo.vue') // 返回 Promise
+
+//注意:如果您使用的是 Babel，你将需要添加 syntax-dynamic-import 插件，才能使 Babel 可以正确地解析语法。
+
+//结合这两者，这就是如何定义一个能够被 Webpack 自动代码分割的异步组件。
+const Foo = () => import('./Foo.vue')
+
+//在路由配置中什么都不需要改变，只需要像往常一样使用 Foo：
+const router = new VueRouter({
+  routes: [
+    { path: '/foo', component: Foo }
+  ]
+})
 ```
+
+* **把组件按组分块**
+
+有时候我们想把某个路由下的所有组件都打包在同个异步块 (chunk) 中。只需要使用 [命名 chunk](https://webpack.js.org/guides/code-splitting-require/#chunkname)，一个特殊的注释语法来提供 chunk name (需要 Webpack > 2.4)。
+
+```js
+const Foo = () => import(/* webpackChunkName: "group-foo" */ './Foo.vue')
+const Bar = () => import(/* webpackChunkName: "group-foo" */ './Bar.vue')
+const Baz = () => import(/* webpackChunkName: "group-foo" */ './Baz.vue')
+```
+
+Webpack 会将任何一个异步模块与相同的块名称组合到相同的异步块中。
 
 ### vuex 是什么？怎么使用？哪种功能场景使用它？
 
